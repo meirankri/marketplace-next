@@ -1,11 +1,12 @@
 "use server";
 import { db } from "@/db/db";
 import { stores } from "@/db/schema";
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 
 export async function getStoreId() {
   const user = await currentUser();
+
   return user?.privateMetadata.storeId;
 }
 

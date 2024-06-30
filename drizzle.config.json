@@ -1,5 +1,13 @@
 {
   "out": "./migrations-folder",
   "schema": "./db/schema.ts",
+  "dialect": "mysql",
+  "dbCredentials": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "meir",
+    "password": "root",
+    "database": "justStopShop"
+  },
   "breakpoints": true
 }

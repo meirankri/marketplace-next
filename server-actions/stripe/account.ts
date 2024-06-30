@@ -45,7 +45,7 @@ export async function createAccountLink() {
     const storeId = Number(await getStoreId());
 
     if (isNaN(storeId)) {
-      throw new Error("Store ID not found");
+      throw new Error("create account link Store ID not found");
     }
 
     const paymentRecord = await db
@@ -128,7 +128,7 @@ export async function updateStripeAccountStatus() {
     const storeId = Number(await getStoreId());
 
     if (isNaN(storeId)) {
-      throw new Error("Store ID not found");
+      throw new Error("updateStripeAccountStatus Store ID not found");
     }
 
     const account = await getStripeAccountDetails(storeId);

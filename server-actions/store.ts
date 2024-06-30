@@ -2,8 +2,7 @@
 
 import { db } from "@/db/db";
 import { stores } from "@/db/schema";
-import { currentUser } from "@clerk/nextjs";
-import { users } from "@clerk/nextjs/dist/api";
+import { currentUser, clerkClient } from "@clerk/nextjs/server";
 import { eq, or } from "drizzle-orm";
 import { z } from "zod";
 import { createSlug } from "@/lib/createSlug";
@@ -51,9 +50,11 @@ export async function createStore(storeName: string) {
 
       return res;
     }
-
-    await users.updateUser(user.id, {
-      privateMetadata: { ...user.privateMetadata, storeId },
+    await clerkClient.users.updateUserMetadata(user.id, {
+      privateMetadata: {
+        ...user.privateMetadata,
+        storeId,
+      },
     });
 
     const res = {
