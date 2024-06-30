@@ -37,6 +37,7 @@ export const CollectionBody = (
       selectedSellers={selectedSellers}
     />
   );
+  const { storeAndProduct } = props;
 
   return (
     <div className="md:grid md:grid-cols-12 md:mt-0 lg:mt-12 mt-12 md:gap-12">
@@ -57,11 +58,12 @@ export const CollectionBody = (
           </AlertDialogContent>
         </AlertDialog>
       </div>
-      {props.storeAndProduct.length > 0 ? (
+      {storeAndProduct.length > 0 ? (
         <div className="grid col-span-12 lg:col-span-9 grid-cols-12 gap-6 h-fit">
-          {props.storeAndProduct.map(
-            (product, i) =>
-              (selectedSellers.includes(product.store.slug ?? "") ||
+          {storeAndProduct.map((product, i) => {
+            const { store } = product;
+            return (
+              (selectedSellers.includes(store?.slug ?? "") ||
                 selectedSellers.length === 0) && (
                 <div
                   className="sm:col-span-6 md:col-span-4 col-span-12"
@@ -70,7 +72,8 @@ export const CollectionBody = (
                   <ProductCard storeAndProduct={product} />
                 </div>
               )
-          )}
+            );
+          })}
           <div className="col-span-12">{props.children}</div>
         </div>
       ) : (

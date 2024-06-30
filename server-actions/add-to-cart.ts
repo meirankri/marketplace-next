@@ -17,7 +17,9 @@ export async function addToCart(newCartItem: CartItem) {
       .select()
       .from(carts)
       .where(eq(carts.id, Number(cartId))));
-  const cartAvailableAndOpen = cartDetails && !cartDetails[0].isClosed;
+
+  const cartAvailableAndOpen =
+    cartDetails && cartDetails?.length !== 0 && !cartDetails[0]?.isClosed;
 
   if (cartAvailableAndOpen) {
     const dbItems = await db
@@ -25,7 +27,9 @@ export async function addToCart(newCartItem: CartItem) {
       .from(carts)
       .where(eq(carts.id, Number(cartId)));
 
-    const allItemsInCart = JSON.parse(dbItems[0].items as string) as CartItem[];
+    const allItemsInCart = JSON.parse(
+      dbItems[0]?.items as string
+    ) as CartItem[];
 
     const newCartItemInCart = allItemsInCart.find(
       (item) => item.id === newCartItem.id

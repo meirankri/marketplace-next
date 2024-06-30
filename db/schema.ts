@@ -1,5 +1,6 @@
 // schema.ts
-import { InferModel } from "drizzle-orm";
+import { type InferSelectModel } from "drizzle-orm";
+
 import {
   boolean,
   decimal,
@@ -29,7 +30,7 @@ export const stores = mysqlTable(
   }
 );
 
-export type Store = InferModel<typeof stores>;
+export type Store = InferSelectModel<typeof stores>;
 
 export const products = mysqlTable("products", {
   id: serial("id").primaryKey(),
@@ -40,7 +41,7 @@ export const products = mysqlTable("products", {
   images: json("images"),
   storeId: int("store_id"),
 });
-export type Product = InferModel<typeof products>;
+export type Product = InferSelectModel<typeof products>;
 
 export const carts = mysqlTable("carts", {
   id: serial("id").primaryKey(),
@@ -49,7 +50,7 @@ export const carts = mysqlTable("carts", {
   clientSecret: text("client_secret"),
   isClosed: boolean("is_closed").default(false),
 });
-export type Cart = InferModel<typeof carts>;
+export type Cart = InferSelectModel<typeof carts>;
 
 export const payments = mysqlTable("payments", {
   id: serial("id").primaryKey(),
@@ -60,7 +61,7 @@ export const payments = mysqlTable("payments", {
   details_submitted: boolean("details_submitted").default(false),
 });
 
-export type Payment = InferModel<typeof payments>;
+export type Payment = InferSelectModel<typeof payments>;
 
 export const orders = mysqlTable(
   "orders",
@@ -86,7 +87,7 @@ export const orders = mysqlTable(
   }
 );
 
-export type Order = InferModel<typeof orders>;
+export type Order = InferSelectModel<typeof orders>;
 
 export const addresses = mysqlTable("addresses", {
   id: serial("id").primaryKey(),
@@ -98,4 +99,4 @@ export const addresses = mysqlTable("addresses", {
   country: text("country"),
 });
 
-export type Address = InferModel<typeof addresses>;
+export type Address = InferSelectModel<typeof addresses>;
