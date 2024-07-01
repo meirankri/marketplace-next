@@ -19,10 +19,7 @@ export const NavBar = ({
 }) => {
   return (
     <>
-      <AnnouncementBar
-        columns={2}
-        description="Free shipping on all orders over $50"
-      >
+      <AnnouncementBar columns={2} description="Shluhim meals">
         <div className="items-center justify-end gap-6 hidden sm:flex">
           <Link
             href={routes.account}

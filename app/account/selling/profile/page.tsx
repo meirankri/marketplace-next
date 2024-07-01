@@ -5,6 +5,7 @@ import { stores } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { updateStore } from "@/server-actions/store";
+import { isEmpty } from "@/lib/checker";
 
 export default async function SellerProfile() {
   const user = await currentUser();
@@ -13,6 +14,7 @@ export default async function SellerProfile() {
     .select()
     .from(stores)
     .where(eq(stores.id, Number(user?.privateMetadata?.storeId)))
+    .limit(1)
     .catch((err) => {
       console.log(err);
       return null;
@@ -24,7 +26,7 @@ export default async function SellerProfile() {
         heading="Selling profile"
         subheading="Review and update your store settings"
       />
-      {storeDetails && (
+      {storeDetails && !isEmpty(storeDetails) && (
         <EditStoreFields
           storeDetails={storeDetails[0]}
           updateStore={updateStore}

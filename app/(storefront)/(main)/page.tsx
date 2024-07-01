@@ -125,11 +125,6 @@ export default async function Home() {
               </div>
               <div className="md:grid md:grid-cols-3 gap-4 flex flex-col mt-12">
                 <FeatureBanner
-                  heading="Free Shipping"
-                  subheading="Free shipping on all orders over $50"
-                  icon={<Truck size={32} />}
-                />
-                <FeatureBanner
                   heading="24/7 Customer Support"
                   subheading="Have a question? Get in touch."
                   icon={<Phone size={32} />}
